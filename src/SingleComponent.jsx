@@ -159,7 +159,7 @@ class SingleComponent extends Component {
   };
 
   printTable = () => {
-    let { data, fname, desc, colors, update } = this.state;
+    let { data, fname, desc, update } = this.state;
 
     let new_data;
 
