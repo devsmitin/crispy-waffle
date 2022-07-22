@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import DataControl from "./DataControl";
 import Table from "./Table";
-
-import "bootstrap/dist/css/bootstrap.min.css";
 class SingleComponent extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +26,7 @@ class SingleComponent extends Component {
   printTable = () => {
     let { data, fname, desc, update } = this.state;
 
-    let new_data;
+    let newData;
 
     if (fname.trim() === "" || desc.trim() === "") {
       alert("both fields are required");
@@ -36,9 +34,9 @@ class SingleComponent extends Component {
     }
 
     if (update !== false) {
-      new_data = [...data];
+      newData = [...data];
 
-      new_data[update] = {
+      newData[update] = {
         fname: fname.trim(),
         desc: desc.trim(),
       };
@@ -50,35 +48,35 @@ class SingleComponent extends Component {
         return false;
       }
 
-      let row_data = {
+      let rowData = {
         fname: fname.trim(),
         desc: desc.trim(),
       };
-      new_data = [...data];
-      new_data.push(row_data);
+      newData = [...data];
+      newData.push(rowData);
     }
 
-    let new_colors = this.updateColors(new_data);
+    let newColors = this.updateColors(newData);
 
     this.setState({
-      data: new_data,
+      data: newData,
       fname: "",
       desc: "",
-      colors: new_colors,
+      colors: newColors,
       update: false,
     });
   };
 
   updateColors = (data) => {
     let { colors } = this.state;
-    let new_colors = {};
+    let newColors = {};
 
     for (const color of Object.keys(colors)) {
-      let color_entries = data.filter((row) => row.desc === color);
-      new_colors[color] = color_entries.length;
+      let colorEntries = data.filter((row) => row.desc === color);
+      newColors[color] = colorEntries.length;
     }
 
-    return new_colors;
+    return newColors;
   };
 
   resetData = () => {
@@ -89,8 +87,8 @@ class SingleComponent extends Component {
     if (action === "delete") {
       let { data } = this.state;
       data.splice(index, 1);
-      let new_colors = this.updateColors(data);
-      this.setState({ data, colors: new_colors });
+      let newColors = this.updateColors(data);
+      this.setState({ data, colors: newColors });
     } else if (action === "update") {
       let { data } = this.state;
       let { fname, desc } = data[index];
@@ -105,61 +103,59 @@ class SingleComponent extends Component {
   render() {
     const { update, colors } = this.state;
     return (
-      <div className="container py-5">
-        <div className="row">
-          <div className="col-md-3">
-            <div className="form-main card card-body">
-              <DataControl
-                label="Name"
-                type="text"
-                name="fname"
-                value={this.state.fname}
-                onupdate={this.handleInputChange}
-              />
-              <DataControl
-                label="Color"
-                type="select"
-                name="desc"
-                options={["Red", "Green", "Blue"]}
-                value={this.state.desc}
-                onupdate={this.handleInputChange}
-              />
+      <div className="row">
+        <div className="col-md-3">
+          <div className="form-main card card-body">
+            <DataControl
+              label="Name"
+              type="text"
+              name="fname"
+              value={this.state.fname}
+              onupdate={this.handleInputChange}
+            />
+            <DataControl
+              label="Color"
+              type="select"
+              name="desc"
+              options={["Red", "Green", "Blue"]}
+              value={this.state.desc}
+              onupdate={this.handleInputChange}
+            />
 
-              <div className="d-flex">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.printTable}
+            <div className="d-flex">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={this.printTable}
+              >
+                {update === false ? "Submit" : "Update"}
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-secondary ms-2"
+                onClick={this.resetData}
+              >
+                Reset
+              </button>
+            </div>
+
+            <div className="d-flex mt-3">
+              {Object.keys(colors).map((key) => (
+                <div
+                  className="bg-secondary text-white flex-fill text-center p-3"
+                  key={key}
                 >
-                  {update === false ? "Submit" : "Update"}
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-secondary ms-2"
-                  onClick={this.resetData}
-                >
-                  Reset
-                </button>
-              </div>
-
-              <div className="d-flex mt-3">
-                {Object.keys(colors).map((key) => (
-                  <div
-                    className="bg-secondary text-white flex-fill text-center p-3"
-                    key={key}
-                  >
-                    {key}: {colors[key]}
-                  </div>
-                ))}
-              </div>
+                  {key}: {colors[key]}
+                </div>
+              ))}
             </div>
           </div>
+        </div>
 
-          <div className="col-md-8">
-            <div className="form-output">
-              <Table data={this.state.data} updateValues={this.updateValues} />
-            </div>
+        <div className="col-md-8">
+          <div className="form-output">
+            <Table data={this.state.data} updateValues={this.updateValues} />
           </div>
         </div>
       </div>

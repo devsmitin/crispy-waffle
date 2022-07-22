@@ -24,12 +24,12 @@ class DataControl extends Component {
 
   render() {
     let dataControl;
-    const c_props = { ...this.props };
+    const currentProps = { ...this.props };
 
-    delete c_props.onupdate;
-    delete c_props.type;
-    delete c_props.label;
-    delete c_props.options;
+    delete currentProps.onupdate;
+    delete currentProps.type;
+    delete currentProps.label;
+    delete currentProps.options;
 
     switch (this.props.type) {
       case "textarea":
@@ -39,7 +39,7 @@ class DataControl extends Component {
             <textarea
               className="form-control"
               type={this.props.type}
-              {...c_props}
+              {...currentProps}
               onChange={this.handleInputChange}
             >
               {this.state[this.props.name]}
@@ -54,7 +54,7 @@ class DataControl extends Component {
             <label className="form-label">{this.props.label}</label>
             <select
               className="form-select"
-              {...c_props}
+              {...currentProps}
               onChange={this.handleInputChange}
             >
               <option value="">{this.props.label}</option>
@@ -76,7 +76,7 @@ class DataControl extends Component {
             <input
               className="form-control"
               type={this.props.type}
-              {...c_props}
+              {...currentProps}
               onChange={this.handleInputChange}
             />
           </div>
