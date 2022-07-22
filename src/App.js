@@ -1,5 +1,5 @@
-import ContextMain from "./ContextMain";
-import SingleComponent from "./SingleComponent";
+import ContextMain from "./context/ContextMain";
+import SingleComponent from "./components/SingleComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {

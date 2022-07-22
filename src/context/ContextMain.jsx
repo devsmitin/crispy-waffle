@@ -79,21 +79,19 @@ export default function ContextMain() {
   };
 
   return (
-    <div className="row">
-      <div className="col-md-3">
-        <AppContext.Provider
-          value={{ mainData, updateData, printTable, resetData }}
-        >
+    <AppContext.Provider
+      value={{ mainData, updateData, printTable, resetData, updateValues }}
+    >
+      <div className="row">
+        <div className="col-md-3">
           <ContextForm />
-        </AppContext.Provider>
-      </div>
-      <div className="col-md-8">
-        <div className="form-output">
-          <AppContext.Provider value={{ mainData, updateValues }}>
+        </div>
+        <div className="col-md-8">
+          <div className="form-output">
             <ContextTable />
-          </AppContext.Provider>
+          </div>
         </div>
       </div>
-    </div>
+    </AppContext.Provider>
   );
 }

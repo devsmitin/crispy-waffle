@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DataControl from "./DataControl";
 import Table from "./Table";
+
 class SingleComponent extends Component {
   constructor(props) {
     super(props);

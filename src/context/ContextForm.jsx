@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "./app-context";
-import DataControl from "./DataControl";
+import DataControl from "../components/DataControl";
+import ContextInputs from "./ContextInputs";
 
 export default function ContextForm() {
   const value = useContext(AppContext);
